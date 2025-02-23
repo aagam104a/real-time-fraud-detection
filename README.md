@@ -1,4 +1,4 @@
-### Real-Time Fraud Detection in Financial Transactions
+# Real-Time Fraud Detection in Financial Transactions
 
 ## Overview
 This project implements a **real-time anomaly detection system** for financial transactions using **Kafka, PySpark, Scikit-learn, AWS Lambda, and Elasticsearch**. The goal is to detect fraudulent transactions in real-time and store flagged transactions for further investigation.
@@ -19,9 +19,23 @@ This project implements a **real-time anomaly detection system** for financial t
 5. **Elasticsearch** stores fraud alerts for search and visualization.
 6. **Streamlit Dashboard** visualizes flagged transactions.
 
-## Project Structure
-real-time-fraud-detection/ │── data/ # Dataset and processed data │── kafka/ # Kafka producer for transaction data │── spark/ # Spark streaming for feature extraction │── model/ # ML model training and prediction │── lambda/ # AWS Lambda fraud detection API │── elasticsearch/ # Fraud transaction storage │── dashboard/ # Frontend monitoring (Streamlit) │── deployment/ # Deployment scripts (Docker, AWS) │── tests/ # Unit and integration tests │── notebooks/ # Jupyter notebooks for data analysis │── README.md # Project documentation │── requirements.txt # Dependencies │── .gitignore # Ignore unnecessary files
-
+## Project Directory Structure
+```
+real-time-fraud-detection/
+│── data/                           # Dataset and processed data
+│── kafka/                          # Kafka producer for transaction data
+│── spark/                          # Spark streaming for feature extraction
+│── model/                          # ML model training and prediction
+│── lambda/                         # AWS Lambda fraud detection API
+│── elasticsearch/                   # Fraud transaction storage
+│── dashboard/                       # Frontend monitoring (Streamlit)
+│── deployment/                      # Deployment scripts (Docker, AWS)
+│── tests/                           # Unit and integration tests
+│── notebooks/                       # Jupyter notebooks for data analysis
+│── README.md                        # Project documentation
+│── requirements.txt                  # Dependencies
+│── .gitignore                        # Ignore unnecessary files
+```
 
 ## Step-by-Step Implementation Guide
 
@@ -52,3 +66,63 @@ real-time-fraud-detection/ │── data/ # Dataset and processed data │─�
 ### **6. Streamlit Dashboard (Visualization & Monitoring)**
 - Build a **real-time dashboard** to monitor transactions.
 - Display **fraud alerts**, **trends**, and **high-risk transactions**.
+
+## Installation & Setup
+
+### **1. Clone the Repository**
+```sh
+git clone https://github.com/your-username/real-time-fraud-detection.git
+cd real-time-fraud-detection
+```
+
+### **2. Install Dependencies**
+```sh
+pip install -r requirements.txt
+```
+
+### **3. Start Kafka Broker & Producer**
+```sh
+docker-compose up -d
+python kafka/producer.py
+```
+
+### **4. Start Spark Streaming**
+```sh
+python spark/spark_stream.py
+```
+
+### **5. Train & Deploy ML Model**
+```sh
+python model/train_model.py
+python lambda/lambda_function.py  # For local testing
+```
+
+### **6. Deploy to AWS Lambda**
+- Zip the `lambda/` folder and upload it to AWS Lambda.
+- Configure API Gateway for REST access.
+
+### **7. Start Elasticsearch**
+```sh
+docker run -d -p 9200:9200 -p 9300:9300 --name elasticsearch elasticsearch:7.10.1
+```
+
+### **8. Start the Dashboard**
+```sh
+streamlit run dashboard/app.py
+```
+
+## Deployment Options
+- **AWS** (MSK for Kafka, Glue for ETL, OpenSearch for Elasticsearch, Lambda for API)
+- **Docker** (Kafka, Spark, Elasticsearch as services)
+- **Kubernetes** (For scalable deployments)
+
+## Future Enhancements
+- Improve model accuracy with deep learning (Autoencoders, GANs).
+- Add a feedback loop to refine the model.
+- Integrate with third-party fraud detection APIs.
+
+## Contributing
+Feel free to submit issues, PRs, or suggestions!
+
+## License
+MIT License.
